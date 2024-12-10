@@ -66,8 +66,6 @@ Provide details about the API endpoints, including the request method, descripti
     "detected by": 38
   }
 
----
-
 ### **Usage Instructions**
 Include any extra steps for using the API or how to interact with it.
 
