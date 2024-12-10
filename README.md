@@ -1,2 +1,2 @@
 # False-Alarm-Detection
-Chemical Industry
+A Flask API for predicting the severity of industrial alarms using machine learning.
