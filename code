@@ -1,0 +1,65 @@
+## Code -
+
+# load all the required libraries
+import columns
+
+from flask import Flask,jsonify,request
+import pandas as pd
+from sklearn.linear_model import LogisticRegression
+import numpy as np
+import joblib
+
+app = Flask(__name__)
+
+
+@app.route('/train_model', methods=['GET'])
+def train():
+    # Load the dataset from an Excel file
+    data = pd.read_excel('C:/Users/Makarand/Downloads/Historical Alarm Cases.xlsx')
+
+    # Define X and y
+    x = data.iloc[:, 1:7]
+    y = data['Spuriosity Index']
+
+    # Create a Logistic Regression model
+    lm = LogisticRegression()
+
+    # Fit the model to the training data
+    lm.fit(x, y)
+
+    # Save the trained model to a file using joblib
+    joblib.dump(lm, 'train.pkl')
+
+    return "Model Trained Successfully"
+
+
+@app.route('/test_model', methods=['POST'])
+def test():
+    # Load the trained model
+    pkl_file = joblib.load('train.pkl')
+
+    # Get JSON data from the request
+    tdata = request.get_json()
+
+    # Define feature names
+    given_columns = ['Ambient Temperature', 'Calibration', 'Unwanted substance deposition', 'Humidity', 'H2S Content','detected by']
+
+    # Extract test data
+    my_test_data = [tdata[col] for col in given_columns]
+    my_data_array = np.array(my_test_data)
+    test_array = my_data_array.reshape(1,6)
+
+    # Create a DataFrame for the test data
+    df_test = pd.DataFrame(test_array,columns=given_columns)
+
+    # Make predictions using the loaded model
+    predictions = pkl_file.predict(df_test)
+
+    # Check prediction result and return appropriate message
+    if predictions != 1:
+        return "True Alarm. Danger ! ⟫⟫"
+    else:
+        return "False Alarm. No Danger. ⟫⟫"
+
+
+app.run(port=7001)
