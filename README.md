@@ -1,26 +1,16 @@
-# False-Alarm-Detection
-A Flask API for predicting the severity of industrial alarms using machine learning.
+## False Alarm Detection
 
-## Table of Contents
-1. [Project Overview](#project-overview)
-2. [Features](#features)
-3. [Technologies Used](#technologies-used)
+# Problem Statement-
+### This project was made for a chemical industry which had sensors installed in various parts of the factory to detect H2S gas which is hazardous to health. Every time one or multiple sensors detected the H2S leak, an emergency alarm rings to alert the workers. For every alarm, the industry calls a team which sanitizes the place and checks for the leak and this was a big cost to the company.
 
-## Project Overview
+A few of the alarms that ring are not even hazardous. The company gave us the data for each alarm with a final column stating the alarm was dangerous or not.
 
-This project aims to minimize the cost of false alarms in industrial environments. Using a machine learning model trained on sensor data, the system predicts whether a gas leak detected by sensors is hazardous or not, helping companies avoid unnecessary emergency responses.
+[ Ambient Temperature	Calibration(days)	Unwanted substance deposition (0/1)	Humidity (%)	H2S Content(ppm)	Dangerous (0/1) ]
 
-## Features
-- **True vs. False Alarm Classification**: Predicts if an alarm is a true or false alarm based on sensor data.
-- **Machine Learning**: Uses Logistic Regression for classification.
-- **Flask API**: Provides endpoints to train and test the model via HTTP requests.
+The data was first pre-processed and analysis libraries like Numpy and Pandas were used to make it ready to be utilized by a machine learning algorithm.
 
-## Technologies Used
-- **Python**: The primary programming language.
-- **Flask**: For creating the API.
-- **Scikit-learn**: For machine learning (Logistic Regression).
-- **Pandas**: For data manipulation and preprocessing.
-- **Numpy**: For numerical operations.
-- **Joblib**: For saving and loading the trained model.
-- **Postman**: For testing API endpoints.
+Problems like standard scaling, categorical data and missing values were handled with appropriate techniques.
 
+Then, we used NB model to make a classifier with first five column as independent columns and dangerous column as dependent/target column.
+
+Now whenever, there is a leakage and the alarm rings, the data is sent to us and we predict if it is dangerous or not. If found dangerous then only the team is called to sanitize the place and fix the leak. This saved a lot of money for the company. 
