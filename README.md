@@ -6,7 +6,7 @@
 
 A few of the alarms that ring are not even hazardous. The company gave us the data for each alarm with a final column stating the alarm was dangerous or not.
 
-[ Ambient Temperature	Calibration(days)	Unwanted substance deposition (0/1)	Humidity (%)	H2S Content(ppm)	Dangerous (0/1) ]
+**[ Ambient Temperature	Calibration(days)	Unwanted substance deposition (0/1)	Humidity (%)	H2S Content(ppm)	Dangerous (0/1) ]**
 
 The data was first pre-processed and analysis libraries like Numpy and Pandas were used to make it ready to be utilized by a machine learning algorithm.
 
